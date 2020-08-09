@@ -1,0 +1,49 @@
+{{ define "footer.inc.htm" }}
+			<!--{hook footer_start.htm}-->
+		
+			<!-- <?php  echo xn_debug_info(); ?> -->
+	
+		</div>
+	</main>
+	
+	<!--{hook footer_nav_before.htm}-->
+
+	{{template "footer_nav.inc.htm" .}}
+	<!-- <?php include _include(APP_PATH.'view/htm/footer_nav.inc.htm');?> -->
+
+	<!--{hook footer_nav_after.htm}-->
+	
+	<!--[if ltg IE 9]>
+	<!-- <script>window.location = 'browser';</script>-- >
+	<![endif]-->
+	
+	<!--{hook footer_js_before.htm}-->
+	
+	<script src="{{.siteconf.view_url}}lang/{{.siteconf.lang}}/bbs.js{{.siteconf.static_version}}"></script>
+	<script src="{{.siteconf.view_url}}js/jquery-3.1.0.js{{.siteconf.static_version}}"></script>
+	<script src="{{.siteconf.view_url}}js/popper.js{{.siteconf.static_version}}"></script>
+	<script src="{{.siteconf.view_url}}js/bootstrap.js{{.siteconf.static_version}}"></script>
+	<script src="{{.siteconf.view_url}}js/xiuno.js{{.siteconf.static_version}}"></script>
+	<script src="{{.siteconf.view_url}}js/bootstrap-plugin.js{{.siteconf.static_version}}"></script>
+	<script src="{{.siteconf.view_url}}js/async.js{{.siteconf.static_version}}"></script>
+	<script src="{{.siteconf.view_url}}js/form.js{{.siteconf.static_version}}"></script>
+	<script>
+	var debug = 1;
+	var url_rewrite_on = "url_rewrite_on";//$conf['url_rewrite_on'];
+	var forumarr = 1; //xn_json_encode($forumarr)
+	var fid = {{.fid}};
+	var uid = {{.uid}};
+	var gid = {{.gid}};
+	xn.options.water_image_url = 'logo_water_url';	// 水印图片 / watermark image
+	</script>
+	<script src="{{.siteconf.view_url}}js/bbs.js{{.siteconf.static_version}}"></script>
+	<!--{hook footer_js_after.htm}-->
+	
+</body>
+<!--{hook footer_body_after.htm}-->
+</html>
+<!--{hook footer_end.htm}-->
+
+<!-- <?php echo cron_run();?> -->
+
+{{ end }}

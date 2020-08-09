@@ -1,0 +1,66 @@
+{{ define "header.inc.htm" }}
+
+<!--{hook header_start.htm}-->
+<!-- <p>{printf "%s-%s" $i "iii"}</p> -->
+<!DOCTYPE html>
+<html lang="{{.siteconf.lang}}">
+<head>
+
+	{{if .siteconf.base_href}}
+		<base href="{{.siteconf.base_href}}" />
+	{{end}}
+
+	<!--{hook header_meta_before.htm}-->
+	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	{{if .siteconf.keywords}}
+	<meta name="keywords" content="{{.siteconf.keywords}}" /> <!-- strip_tags($header['keywords'])-->
+	{{end}}
+
+	<meta name="description" content="{{.siteconf.description}}" /> <!-- strip_tags($header['Description'])-->
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
+	<meta http-equiv="Cache-Control" content="no-transform"/>
+	<meta http-equiv="Cache-Control" content="no-siteapp"/>
+	
+	<title>{{.siteconf.title}}</title>
+	
+	<!--{hook header_link_before.htm}-->
+	
+	<link rel="shortcut icon" href="{{.siteconf.view_url}}img/favicon.ico" />
+	<link rel="icon" sizes="32x32" href="{{.siteconf.view_url}}img/favicon.ico">
+	<link rel="Bookmark" href="{{.siteconf.view_url}}img/favicon.ico" />
+	
+	<!--{hook header_bootstrap_before.htm}-->
+{{if .siteconf.bootstrap_css}}
+		<link rel="stylesheet" href="{{.siteconf.bootstrap_css}}">
+{{else}}
+		<link rel="stylesheet" href="{{.siteconf.view_url}}css/bootstrap.css{{.siteconf.static_version}}">
+	<!--{hook header_bootstrap_after.htm}-->
+{{end}}
+{{if .siteconf.bootstrap_bbs_css}}
+	<!--{hook header_bootstrap_bbs_before.htm}-->
+	<link rel="stylesheet" href="{{.siteconf.bootstrap_bbs_css}}">
+{{else}}
+	<link rel="stylesheet" href="{{.siteconf.view_url}}css/bootstrap-bbs.css{{.siteconf.static_version}}">
+	<!--{hook header_bootstrap_bbs_after.htm}-->
+{{end}}
+
+	<!--{hook header_link_after.htm}-->
+	
+</head>
+
+<body>
+	
+	<!--{hook header_body_start.htm}-->
+	
+	{{template "header_nav.inc.htm" .}}
+
+	<main id="body">
+		<div class="container">
+	
+		<!--{hook body_start.htm}-->
+
+{{ end }}

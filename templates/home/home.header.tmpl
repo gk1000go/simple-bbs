@@ -1,0 +1,11 @@
+{{ define "home/header" }}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{{ if .title }} {{.title}} {{ else }} Home {{ end }} </title>
+        <style type="text/css" media="screen">
+            @import url("../assets/css/xxx.css");
+        </style>
+    </head>
+{{ end }}

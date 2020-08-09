@@ -1,0 +1,14 @@
+[SqlText]
+type = 'mysql'
+host = 'localhost'
+port = '3306'
+user = 'root'
+password = 'root'
+name = 'next0'
+tablepre = 'bbs_'
+charset = 'utf8'
+engine = """
+aaa,v
+vvnnnn
+"""
+

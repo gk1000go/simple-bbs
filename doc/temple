@@ -1,0 +1,200 @@
+以下pipeline是对数据的假设
+
+注释
+{{/* 注释 */}}
+{{- /* 去掉前后空白 */ -}}
+//action的注释不会被输出，且必须在“{{}}”内，由“/*”和“*/”包含
+
+　　
+
+　　2. 文本化输出
+
+{{pipeline}}
+//pipeline值的文本化表示被复制到输出
+
+
+
+3. 判断结构
+
+if
+{{if pipeline}} T1 {{end}}
+如果pipeline为空（空字符、0、false、nil指针，nil接口, map或slice或array长度为0），无输出
+
+if … else …
+{{if pipeline}} T1 {{else}} T0 {{end}}
+
+if…elseif …
+{{if pipeline}} T1 {{else if pipeline}} T0 {{end}}
+
+
+
+4. 循环结构
+　　{{range pipeline}} T1 {{end}}
+　　pipeline的必须为map、array、slice或channel。如果pipeline长度为0，无输出。如果长度大于0，则T1执行，“.”被设置为当前成功遍历的元素。如果pipeline为map并且key是可比较的，那么元素按照排序后的key值被访问
+
+　　{{range pipeline}} T1 {{else}} T0 {{end}}
+　　pipeline的必须为map、array、slice或channel。如果pipeline长度为0, 执行T0。否则执行T1。
+
+5. 模板嵌套
+　　{{template "name"}}
+　　执行指定模板name, 无任何数据传入
+
+     {{template "name" pipeline}}
+     执行指定模板name, pipeline数据传入
+
+　　{{block "name" pipeline}} T1 {{end}}
+　　定义模板name并执行模板，传入数据pipeline
+
+
+6. with　　
+
+　　{{with pipeline}} T1 {{end}}
+      如果pipeline不为空，那么执行T1, 并将光标“.” 设置为pipeline
+
+　　{{with pipeline}} T1 {{else}} T0 {{end}}
+　　如果pipeline不为空，那么执行T1, 并将光标“.” 设置为pipeline；否则，执行T0, 光标“.”不受影响
+
+7. Arguments
+
+-  布尔型、字符串型、字符、整数、浮点型、虚数或负数和在go语法一样不变，表现和Go的无类型常量一样
+- nil和Go的无类型nil一样
+- “.”代表当前光标的值
+- 变量名前面使用"$"符，例如
+    $piOver2
+
+- struct的数据根据域（字段）访问，例如
+    .Field
+  支持链式调用:
+    .Field1.Field2
+  数据域可以保持在变量中，所以同时支持下面写法:
+    $x.Field1.Field2
+
+- map数据根据key来访问，例如：
+    .Key
+  支持链式访问：
+    .Field1.Key1.Field2.Key2
+ 字典keys同样支持变量存储后访问:
+    $x.key1.key2
+
+- 为方法的调用，例如
+    .Method
+    结果是以调用方法的值使用“.”作为接收器，dot.Method(). Mehod必须有一个或2个放回值
+    第二个返回值为error类别，如果error不为空，执行中断，错误返回作为执行结果。方法调用支持链式操作：
+     .Field1.Key1.Method1.Field2.Key2.Method2
+  变量方式:
+    $x.Method1.Field
+
+- 函数调用：
+    fun
+- 组合调用：
+    print (.F1 arg1) (.F2 arg2)
+    (.StructValuedMethod "arg").Field
+
+
+
+8. Pipeline
+
+一个pipeline可能是链式的命令序列。一个命令可以是一个参数值、或一次函数调用、或一次方法调用。方法调用和函数调用可能有多个参数。
+
+Argument
+    结果就是参数的值
+.Method [Argument...]
+    method可以是单独的或者是链式调用的最后一个而不是链式调用的中间元素,这样才能获取参数
+    结果就是使用参数调用method:
+        dot.Method(Argument1, etc.)
+functionName [Argument...]
+    使用参数调用方法:
+        function(Argument1, etc.)
+
+通过用管道字符“|”分隔一系列命令，可以“链接”管道。 在链式管道中，每个命令的结果将作为以下命令的最后一个参数传递。 管道中最终命令的输出是管道的值。
+
+命令的输出将是一个值或两个值，第二个值具有类型错误。 如果存在第二个值并且计算结果为非nil，则执行终止，并将错误返回给Execute的调用者。
+Variables
+
+在一次action内，pipeline可以使用变量捕获结果
+
+$variable := pipeline
+
+如果在一个range action内使用变量，可以给成功迭代的元素设置变量：
+
+range $index,$element := range pipeline
+
+变量的作用范围在它生命的控制结构内，直到“end”action结束.如果不在控制结构内生命的变量，直到template结束。
+
+当template开始执行时，$变量被默认设置成传递个Execute函数的数据参数，也就是“.”光标的开始值
+Pilelines和Variables例子
+
+{{"\"output\""}}
+    字符串常量
+{{`"output"`}}
+    字符原串常量
+{{printf "%q" "output"}}
+    一次函数调用
+{{"output" | printf "%q"}}
+    函数调用，最终的参数来自上一次的命令
+{{printf "%q" (print "out" "put")}}
+    括号内的参数
+{{"put" | printf "%s%s" "out" | printf "%q"}}
+    一个更精细的调用
+{{"output" | printf "%s" | printf "%q"}}
+    链式调用.
+{{with "output"}}{{printf "%q" .}}{{end}}
+    使用with action的调用，.为pipeline的值
+{{with $x := "output" | printf "%q"}}{{$x}}{{end}}
+    with action 创建变量和使用变量
+{{with $x := "output"}}{{printf "%q" $x}}{{end}}
+    with action 创建变量并在作用范围内在另一action使用变量
+{{with $x := "output"}}{{$x | printf "%q"}}{{end}}
+    with action 创建变量和使用管道“|”
+
+
+
+9. Functions
+
+在执行期间，函数在2个函数字典查找：首先查找template函数字典，然后查找全局函数字典。默认情况下，template函数字典没有函数，不过提供了Funcs方法设置template函数字典。
+预定义的全局函数有：
+
+and        返回bool值，例如 and x y
+
+call        第一个参数为调用的函数，其他为该函数的参数，例如 call .X.Y 1 2,
+        等效dot.X.Y(1, 2) ，该函数一样必须由1个或2个返回值，第二个为error类型
+
+html     返回参数的文本化表示的HTML。 此功能不可用
+        在html / template中，有一些异常。
+
+index     例如， index x 1 2 3 。  表示x[1][2][3]
+
+js        返回参数的文本化表示的javascript
+
+len        返回参数的长度
+
+not         返回参数的否定值
+
+or        或运算，例如 or x y
+
+print
+        fmt.Sprint别名
+printf
+        fmt.Sprintf别名
+println
+        fmt.Sprintln别名
+urlquery
+        返回文本表示形式的转义值, 它的参数以适合嵌入URL查询的形式出现。
+
+上面的bool函数把任何零值当做false,非零值当做true
+
+比较函数：
+
+eq        等于    操作符：arg1 == arg2
+
+ne          不等于    操作符：arg1 != arg2
+
+lt        小于    操作符    arg1 < arg2
+
+le        小于等于    操作符    arg1 <= arg2
+
+gt         大于    操作符    arg1 > arg2
+
+ge         大于等于     操作符: arg1 >= arg2
+
+

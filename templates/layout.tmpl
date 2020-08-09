@@ -1,0 +1,15 @@
+<!-- templates/layout.tmpl -->
+{{ define "layout.tpl"}}
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>TITLE</title>
+    </head>
+    <body>
+    <div class="container">
+        {{ template "content" }}
+        {{ .param1 }}
+    </div>
+    </body>
+    </html>
+{{ end }}

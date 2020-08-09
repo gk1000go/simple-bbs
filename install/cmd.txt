@@ -1,0 +1,35 @@
+mysql -P3406 -uroot -proot <test.sql
+echo Exit Code is %errorlevel%
+
+
+
+CREATE DATABASE IF NOT EXISTS next98;
+show databases;
+
+
+select *
+from information_schema.tables
+where table_name='bbs_user'
+
+
+mysql -P3406 -uroot -proot <test.sql
+
+
+mysql -P3406 -uroot -proot next9<01.database.sql
+mysql -P3406 -uroot -proot next9<02.bbs_user.sql
+mysql -P3406 -uroot -proot next9<03.bbs_group.sql
+mysql -P3406 -uroot -proot next9<04.bbs_forum.sql
+mysql -P3406 -uroot -proot next9<04.bbs_forum_access.sql
+mysql -P3406 -uroot -proot next9<05.bbs_thread.sql
+mysql -P3406 -uroot -proot next9<06.bbs_thread_top.sql
+mysql -P3406 -uroot -proot next9<07.bbs_post.sql
+mysql -P3406 -uroot -proot next9<08.bbs_attach.sql
+mysql -P3406 -uroot -proot next9<09.bbs_mythread.sql
+mysql -P3406 -uroot -proot next9<10.bbs_mypost.sql
+mysql -P3406 -uroot -proot next9<11.bbs_session.sql
+mysql -P3406 -uroot -proot next9<12.bbs_session_data.sql
+mysql -P3406 -uroot -proot next9<13.bbs_modlog.sql
+mysql -P3406 -uroot -proot next9<14.bbs_kv.sql
+mysql -P3406 -uroot -proot next9<15.bbs_cache.sql
+mysql -P3406 -uroot -proot next9<16.bbs_queue.sql
+mysql -P3406 -uroot -proot next9<17.bbs_table_day.sql

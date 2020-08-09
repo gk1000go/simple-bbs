@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Bootstrap 实例 - 面包屑导航</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+
+</head>
+<div class="container">
+    <div class="card-deck">
+        <div class="card">
+            <img class="card-img-top" src="https://www.bootcss.com/p/layoutit/img/people.jpg" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
+                <a href="#" class="stretched-link">Go somewhere</a>
+            </div>
+        </div>
+        <div class="card">
+            <img class="card-img-top" src="https://www.bootcss.com/p/layoutit/img/city.jpg" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
+                <a href="#" class="stretched-link">Go somewhere</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row pb-1">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="row card-header m-0 p-1">
+                    <div class="col-sm-6">
+                        <small class="text-muted">a simpe title</small>
+                    </div>
+                    <div class="col-sm-2">
+                        <a href="#" class="link">Go somewhere</a>
+                    </div>
+                    <div class="col-sm-2">
+                        <a href="#" class="link">Go somewhere</a>
+                    </div>
+                    <div class="col-sm-2">
+                        <a class="btn btn-sm " href="#" role="button">Link</a>
+                        <a class="btn btn-sm " href="#" role="button">Link</a>
+                        <a class="btn btn-sm" href="#" role="button">Link</a>
+                    </div>
+                </div>
+                <div class="row card-body">
+                    <div class="col-sm-12">
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                    <div class="col-sm-10">
+                        <small class="text-muted">a simpe title</small>
+                    </div>
+                    <div class="col-sm-2">
+                        <a href="#" class="stretched-link">Go somewhere</a>
+                    </div>
+                <div class="row card-body">
+                    <div class="col-sm-10">
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                    </div>
+                    <img class="col-sm-2" src="https://picsum.photos/100/100" alt="Card image cap">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h2>
+                    Hello, world!
+                </h2>
+                <p>
+                    This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.
+                </p>
+                <p>
+                    <a class="btn btn-primary btn-large" href="#">Learn more</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-2 ">
+        <div class="col-12">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link btn-primary" href="#">Home <span class="badge badge-light">42</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">More <span class="badge badge-secondary">16</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">More <span class="badge badge-secondary">16</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">ME</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row border bg-primary mb-1">
+            <div class="col-2">发布时间</div>
+            <div class="col-1 pl-1">分类</div>
+            <div class="col-7">内容</div>
+            <div class="col-2">发布者</div>
+        </div>
+        <div class="row border-bottom mb-1">
+            <div class="col-2">2020/06/20 14:23</div>
+            <div class="col-1 pl-1">三分之一</div>
+            <div class="col-7">Column</div>
+            <div class="col-2">三分之一空空空</div>
+        </div>
+        <div class="row border-bottom mb-1">
+            <div class="col-2">2020/10/21 04:38</div>
+            <div class="col-1 pl-1">三分之一</div>
+            <div class="col-7">Column</div>
+            <div class="col-2">三分之一空空空</div>
+        </div>
+
+
+    </div>
+
+
+
+    <div id="editorxxxx">
+        <!-- https://blog.csdn.net/weixin_42992109/article/details/86136592 -->
+    </div>
+</div>
+
+</body>
+<script>
+
+    CKEDITOR.replace( 'editorxxxx' );
+</script>
+</html>
